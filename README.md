@@ -1,1 +1,3 @@
-# Biscriptual-Writer-Identification
+This work is based on CNN for writer identification and image generation. The first part is based on an image generator which is an autoencoder. The second part is the classifier which identifies the writers. The code is written in python using tensorflow library. The dataset used for this work is available in: https://www.kaggle.com/datasets/rifatabassummim/bi-scriptual-writer-identification-dataset This dataset contains handwritten letters of 24 writers, each written three times, in both Bangla and English language. There is two folders; one containing raw dataset and other one is containing augemented data of the raw data. 
+
+The environment used for executing is Kaggle platform using Tensorflow.# Biscriptual-Writer-Identification
