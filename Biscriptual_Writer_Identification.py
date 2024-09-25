@@ -90,22 +90,22 @@ inputs = keras.Input(shape=input_encoder, name='input_layer')
 # Block 1
 x = layers.Conv2D(32, kernel_size=3, strides= 1, padding='same', name='conv_1')(inputs)
 x = layers.BatchNormalization(name='bn_1')(x)
-x = layers.LeakyReLU(name='lrelu_1')(x)
+x = layers.LeakyReLU(name='leakyrelu_1')(x)
 
 # Block 2
 x = layers.Conv2D(64, kernel_size=3, strides= 2, padding='same', name='conv_2')(x)
 x = layers.BatchNormalization(name='bn_2')(x)
-x = layers.LeakyReLU(name='lrelu_2')(x)
+x = layers.LeakyReLU(name='leakyrelu_2')(x)
 
 # Block 3
 x = layers.Conv2D(64, 3, 2, padding='same', name='conv_3')(x)
 x = layers.BatchNormalization(name='bn_3')(x)
-x = layers.LeakyReLU(name='lrelu_3')(x)
+x = layers.LeakyReLU(name='leakyrelu_3')(x)
 
 # Block 4
 x = layers.Conv2D(64, 3, 1, padding='same', name='conv_4')(x)
 x = layers.BatchNormalization(name='bn_4')(x)
-x = layers.LeakyReLU(name='lrelu_4')(x)
+x = layers.LeakyReLU(name='leakyrelu_4')(x)
 
 # Final Block
 flatten = layers.Flatten()(x)
@@ -117,18 +117,18 @@ x = layers.Reshape((8, 8, 64), name='Reshape_Layer')(x)  # Reshaping to 8x8x64
 
 # Block 1
 x = layers.Conv2DTranspose(64, 3, strides=2, padding='same', name='conv_transpose_1')(x)  # Stride 2 to double the size
-x = layers.BatchNormalization(name='bnd_1')(x)
-x = layers.LeakyReLU(name='lrelud_1')(x)
+x = layers.BatchNormalization(name='bndec_1')(x)
+x = layers.LeakyReLU(name='leakyreludec_1')(x)
 
 # Block 2
 x = layers.Conv2DTranspose(64, 3, strides=2, padding='same', name='conv_transpose_2')(x)  # Stride 2 to double the size
-x = layers.BatchNormalization(name='bnd_2')(x)
-x = layers.LeakyReLU(name='lrelud_2')(x)
+x = layers.BatchNormalization(name='bndec_2')(x)
+x = layers.LeakyReLU(name='leakyreludec_2')(x)
 
 # Block 3
 x = layers.Conv2DTranspose(32, 3, strides=2, padding='same', name='conv_transpose_3')(x)  # Stride 2 to double the size
-x = layers.BatchNormalization(name='bnd_3')(x)
-x = layers.LeakyReLU(name='lrelud_3')(x)
+x = layers.BatchNormalization(name='bndec_3')(x)
+x = layers.LeakyReLU(name='leakyreludec_3')(x)
 
 # Block 4
 outputs = layers.Conv2DTranspose(3, (3, 3), activation='sigmoid', padding='same', name='conv_transpose_4')(x)
@@ -145,23 +145,23 @@ input_shape = (64, 64, 3)
 inputs = Input(shape=input_shape)
 
 # Define path1
-path1 = Conv2D(filters=96, kernel_size=(7, 7), activation='relu', strides=(2, 2), padding = 'same')(inputs)
-path1 = MaxPooling2D(pool_size=(3, 3), strides=(2, 2))(path1)
-path1 = Conv2D(filters=256, kernel_size=(5, 5), activation='relu', strides=(1, 1), padding='same')(path1)
-path1 = MaxPooling2D(pool_size=(3, 3), strides=(2, 2))(path1)
-path1 = Conv2D(filters=256, kernel_size=(3, 3), activation='relu', strides=(1, 1), padding='same')(path1)
-path1 = Conv2D(filters=384, kernel_size=(3, 3), activation='relu', strides=(1, 1), padding='same')(path1)
-path1 = MaxPooling2D(pool_size=(3, 3), strides=(2, 2))(path1)
-path1 = Flatten()(path1)
+y = Conv2D(filters=96, kernel_size=(7, 7), activation='relu', strides=(2, 2), padding = 'same')(inputs)
+y = MaxPooling2D(pool_size=(3, 3), strides=(2, 2))(y)
+y = Conv2D(filters=256, kernel_size=(5, 5), activation='relu', strides=(1, 1), padding='same')(y)
+y = MaxPooling2D(pool_size=(3, 3), strides=(2, 2))(path1)
+y = Conv2D(filters=256, kernel_size=(3, 3), activation='relu', strides=(1, 1), padding='same')(y)
+y = Conv2D(filters=384, kernel_size=(3, 3), activation='relu', strides=(1, 1), padding='same')(y)
+y = MaxPooling2D(pool_size=(3, 3), strides=(2, 2))(y)
+y = Flatten()(y)
 
-path1 = Dropout(0.5)(path1)
-path1 = Dense(1024, activation='relu')(path1)
-path1 = Dropout(0.5)(path1)
-path1 = Dense(1024, activation='relu')(path1)
-path1 = Dropout(0.5)(path1)
-path1 = Dense(24, activation='softmax')(path1)
+y = Dropout(0.5)(path1)
+y = Dense(1024, activation='relu')(y)
+y = Dropout(0.5)(path1)
+y = Dense(1024, activation='relu')(y)
+y = Dropout(0.5)(path1)
+y = Dense(24, activation='softmax')(y)
 
-outputs = path1
+outputs = y
 
 # Create Model
 discriminator = Model(inputs=inputs, outputs=outputs)
