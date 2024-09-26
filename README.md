@@ -2,6 +2,7 @@ This work is based on CNN for writer identification and image generation. The fi
 
 
 The environment used for executing is the Kaggle platform using GPU100 accelerator.# Biscriptual-Writer-Identification
+
 Please cite the following paper if you use this code:
 
 Rifa Tabassum Mim, S. A. H. Chowdhury, and Al Nahian Mugdho, "An Autoencoder-based Approach of Automatic Writer Identification from Biscriptual Characters," 2024 2nd International Conference on Information and Communication Technology (ICICT), October 21-22, Dhaka, Bangladesh.
